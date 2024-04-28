@@ -1,11 +1,11 @@
-import { GameOptions } from './gameOptions';
+import {GameOptions} from "./GameOptions";
 
 // simple function to convert pixels to meters
-export function toMeters(n : number) : number {
+export function toMeters(n: number): number {
     return n / GameOptions.worldScale;
 }
 
 // simple function to convert meters to pixels
-export function toPixels(n: number) : number {
+export function toPixels(n: number): number {
     return n * GameOptions.worldScale;
 }

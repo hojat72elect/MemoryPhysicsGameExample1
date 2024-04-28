@@ -1,6 +1,7 @@
 import 'phaser'
-import {PreloadAssets} from "./preloadAssets";
-import {PlayGame} from "./playGame";
+import {PreloadAssets} from "./PreloadAssets";
+import {PlayGame} from "./PlayGame";
+
 
 
 const scaleObject: Phaser.Types.Core.ScaleConfig = {
