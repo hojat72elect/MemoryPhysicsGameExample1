@@ -2,8 +2,6 @@ import 'phaser'
 import {PreloadAssets} from "./PreloadAssets";
 import {PlayGame} from "./PlayGame";
 
-
-
 const scaleObject: Phaser.Types.Core.ScaleConfig = {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
@@ -17,8 +15,8 @@ const configObject: Phaser.Types.Core.GameConfig = {
     backgroundColor: 0x1dc8fc,
     scale: scaleObject,
     scene: [PreloadAssets, PlayGame],
-}
+};
 
 window.addEventListener('load', () => {
-    const game = new Phaser.Game(configObject)
-})
+    new Phaser.Game(configObject)
+});

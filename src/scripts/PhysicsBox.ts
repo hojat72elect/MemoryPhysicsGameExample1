@@ -1,11 +1,28 @@
 import * as planck from 'planck';
 import {toMeters} from "./PlanckUtils";
 
-
-// this class extends planck Phaser Sprite class
+// A phaser sprite which follows planckJS physical rules.
 export class PhysicsBox extends Phaser.GameObjects.Sprite {
 
-    constructor(scene : Phaser.Scene, world : planck.World, posX : number, posY : number, width : number, height : number, hideAfter : number) {
+    /**
+     *
+     * @param scene - The scene that I want to add this sprite to.
+     * @param world
+     * @param posX
+     * @param posY
+     * @param width
+     * @param height
+     * @param hideAfter
+     */
+    constructor(
+        scene: Phaser.Scene,
+        world: planck.World,
+        posX: number,
+        posY: number,
+        width: number,
+        height: number,
+        hideAfter: number
+    ) {
 
         super(scene, posX, posY, 'tiles');
 
@@ -17,7 +34,7 @@ export class PhysicsBox extends Phaser.GameObjects.Sprite {
         scene.add.existing(this);
 
         // this is how we create a generic Box2D body
-        let box : planck.Body = world.createBody();
+        let box: planck.Body = world.createBody();
 
         // Box2D bodies are created as static bodies, but we can make them dynamic
         box.setDynamic();
@@ -32,17 +49,17 @@ export class PhysicsBox extends Phaser.GameObjects.Sprite {
         box.setMassData({
 
             // body mass
-            mass : 1,
+            mass: 1,
 
             // body center
-            center : planck.Vec2(),
+            center: planck.Vec2(),
 
             // I have to say I do not know the meaning of this "I", but if you set it to zero, bodies won't rotate
-            I : 1
+            I: 1
         });
 
         // initial random value
-        let randomValue : number = -1;
+        let randomValue: number = -1;
 
         // set a random value
         randomValue = Phaser.Math.Between(0, 9);
@@ -51,22 +68,22 @@ export class PhysicsBox extends Phaser.GameObjects.Sprite {
         this.setFrame(randomValue);
 
         // set a timed event to hide box image
-        let timedEvent : Phaser.Time.TimerEvent = scene.time.addEvent({
+        let timedEvent: Phaser.Time.TimerEvent = scene.time.addEvent({
 
             // event delay
-            delay : hideAfter,
+            delay: hideAfter,
 
             // optional arguments: the sprite itself
-            args : [this],
+            args: [this],
 
             // callback function
-            callback : () => {
+            callback: () => {
 
                 // set frame to 10 (cover)
                 this.setFrame(10);
 
                 // get box user data
-                let userData : any = box.getUserData();
+                let userData: any = box.getUserData();
 
                 // set box as covered
                 userData.covered = true;
@@ -75,10 +92,10 @@ export class PhysicsBox extends Phaser.GameObjects.Sprite {
 
         // a body can have anything in its user data, normally it's used to store its sprite
         box.setUserData({
-            sprite : this,
-            value : randomValue,
-            covered : false,
-            event : timedEvent
+            sprite: this,
+            value: randomValue,
+            covered: false,
+            event: timedEvent
         });
     }
 }
